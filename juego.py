@@ -16,7 +16,7 @@ class Personaje:
         self.vida += 10
         
     def estado(self):
-        print(f"tu estado es: vida: {self.vida} tu Daño base es: {self.daño} tu puntuacion es: {self.puntuacion}") 
+        print(f"tu estado es: vida: {self.vida} tu Daño base es: {self.daño} ") 
  #Clases enemigos   
 class Enemigo ():
     def __init__(self,vida,daño,dado):
@@ -67,7 +67,7 @@ class Mago(Enemigo):
 class Vampiro(Personaje):
     
     def __init__(self):
-        super().__init__(vida=40,daño=6,dado=0)
+        super().__init__(vida=60,daño=6,dado=0)
     def atacar(self,enemigo):
         
         dado = rd.randint(1,5)
@@ -80,7 +80,7 @@ class Vampiro(Personaje):
         super().estado()
     
     def curar(self):
-        super().curar()
+        super().curarse()
         
 class Asesino(Personaje):
     def __int__(self):
@@ -135,21 +135,24 @@ while jugador.vida>0:
     if niveles == 1:
         print("Te encontraste al orco malvado")
         enemigo = Orco()
-        while jugador.vida > 0 or enemigo.vida>0:
+        while jugador.vida > 0 and enemigo.vida>0:
             decision = int(input("elije una accion |1. atacar | |2. curarse"))
             if decision == 1:
                 jugador.atacar(enemigo)
                 enemigo.atacar(jugador)
                 jugador.estado()
             else:
-                jugador.curar()
+                jugador.curarse()
                 enemigo.atacar(jugador)
                 jugador.estado()
             if jugador.vida<=0:
                 print("| PERDISTE |")
             elif enemigo.vida<=0:
                 print("mataste al enemigo sigues avanzando por el bosque")
-                
+        if niveles == 2:
+            evento = amigable()
+            evento.evento_amigable(jugador)
+    
     print("Te encontraste el general de esqueleto")
     enemigo = Esqueleto()
     if niveles==3:
@@ -160,7 +163,7 @@ while jugador.vida>0:
                 enemigo.atacar(jugador)
                 jugador.estado()
             else:
-                jugador.curar()
+                jugador.curarse()
                 enemigo.atacar(jugador)
                 jugador.estado()
             if jugador.vida<=0:
@@ -168,9 +171,9 @@ while jugador.vida>0:
             elif enemigo.vida<=0:
                 print("mataste al general esqueleto sigues avanzando por el bosque, buscando la forma de vengar a tu padre")
     print("Encuntras al asesino de tu padre ")
-    if jugador== Vampiro()
+    if isinstance(jugador,Vampiro):
         print("el te mira y reconoce el poder oscuro en ti")
-    elif jugador == Asesino:
+    elif isinstance(jugador,Asesino):
         print("El mago oscuro te mira y te dice ¿Tanta sangre por un ")
     
     enemigo =  Mago()
@@ -182,7 +185,7 @@ while jugador.vida>0:
                 enemigo.atacar(jugador)
                 jugador.estado()
             else:
-                jugador.curar()
+                jugador.curarse()
                 enemigo.atacar(jugador)
                 jugador.estado()
             if jugador.vida<=0:
