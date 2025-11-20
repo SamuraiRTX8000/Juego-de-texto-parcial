@@ -83,8 +83,8 @@ class Vampiro(Personaje):
         super().curarse()
         
 class Asesino(Personaje):
-    def __int__(self):
-        super()._init_(vida=30, daño=4, dado=0)
+    def __init__(self):
+        super().__init__(vida=75, daño=4, dado=0)
     def ataca(self,enemigo):
 
         dado=rd.randint (1,6)
@@ -127,7 +127,7 @@ eleccion = int(input("Elije tu personaje |1 vampiro(menos vida pero puede roba v
 if eleccion == 1:
    jugador = Vampiro()
 else:
-    juagador = Asesino()
+    jugador = Asesino()
 
 print("Entraste al bosque magico buscando derrotar al mago oscuro")
 while jugador.vida>0:
@@ -145,18 +145,21 @@ while jugador.vida>0:
                 jugador.curarse()
                 enemigo.atacar(jugador)
                 jugador.estado()
-            if jugador.vida<=0:
-                print("| PERDISTE |")
+           
+            if jugador.vida <= 0:
+                print("GAME OVER")
+                break
             elif enemigo.vida<=0:
                 print("mataste al enemigo sigues avanzando por el bosque")
-        if niveles == 2:
-            evento = amigable()
-            evento.evento_amigable(jugador)
+    if niveles == 2:
+        evento = amigable()
+        evento.evento_amigable(jugador)
     
-    print("Te encontraste el general de esqueleto")
+   
     enemigo = Esqueleto()
     if niveles==3:
-        while jugador.vida > 0 or enemigo.vida>0:
+        print("Te encontraste el general de esqueleto")
+        while jugador.vida > 0 and enemigo.vida>0:
             decision = int(input("elije una accion |1. atacar | |2. curarse"))
             if decision == 1:
                 jugador.atacar(enemigo)
@@ -166,19 +169,22 @@ while jugador.vida>0:
                 jugador.curarse()
                 enemigo.atacar(jugador)
                 jugador.estado()
-            if jugador.vida<=0:
-                print("| PERDISTE |")
+            
+            if jugador.vida <= 0:
+                print("GAME OVER")
+                break
             elif enemigo.vida<=0:
                 print("mataste al general esqueleto sigues avanzando por el bosque, buscando la forma de vengar a tu padre")
-    print("Encuntras al asesino de tu padre ")
-    if isinstance(jugador,Vampiro):
-        print("el te mira y reconoce el poder oscuro en ti")
-    elif isinstance(jugador,Asesino):
-        print("El mago oscuro te mira y te dice ¿Tanta sangre por un ")
     
     enemigo =  Mago()
     if niveles == 4:
-         while jugador.vida > 0 or enemigo.vida>0:
+        print("Encuntras al asesino de tu padre ")
+        if isinstance(jugador,Vampiro):
+            print("el te mira y reconoce el poder oscuro en ti")
+        elif isinstance(jugador,Asesino):
+            print("El mago oscuro te mira y te dice ¿Tanta sangre por un ")
+        
+        while jugador.vida > 0 and enemigo.vida>0:
             decision = int(input("elije una accion |1. atacar | |2. curarse"))
             if decision == 1:
                 jugador.atacar(enemigo)
@@ -188,8 +194,10 @@ while jugador.vida>0:
                 jugador.curarse()
                 enemigo.atacar(jugador)
                 jugador.estado()
-            if jugador.vida<=0:
-                print("| PERDISTE |")
+            
+            if jugador.vida <= 0:
+                print("GAME OVER")
+                break
             elif enemigo.vida<=0:
                 print("mataste al mago oscuro  vengando a tu padre")
                 print("Ganaste el juego")
