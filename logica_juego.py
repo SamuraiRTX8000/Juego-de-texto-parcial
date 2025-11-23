@@ -12,8 +12,8 @@ class Personaje:
         print(f"hiciste {daño} puntos de daño el enemigo tiene {enemigo.vida}")
     def curarse(self):
         print("Te tomaste una poxion de curacion")
-        print("te renueva  10 puntos de curacion")
-        self.vida += 10
+        print("te renueva  30 puntos de curacion")
+        self.vida += 30
         
     def estado(self):
         print(f"tu estado es: vida: {self.vida} tu Daño base es: {self.daño} ") 
@@ -31,7 +31,7 @@ class Enemigo ():
 
 class Esqueleto(Enemigo):
     def __init__(self):
-        super().__init__(vida=60, daño=4, dado=0)
+        super().__init__(vida=54, daño=4, dado=0)
 
     def atacar(self, jugador):
         super().atacar(jugador)
@@ -45,14 +45,14 @@ class Esqueleto(Enemigo):
 
 class Orco(Enemigo):
     def __init__(self):
-        super(). __init__(vida=100,daño=8,dado=0)
+        super(). __init__(vida=85,daño=8,dado=0)
     def atacar(self, jugador):
         super().atacar(jugador)
         
 
 class Mago(Enemigo):
     def __init__(self):
-        super().__init__(vida=120,daño=5,dado=0)
+        super().__init__(vida=102,daño=4.2,dado=0)
     def atacar(self,jugador):
 
         dado = rd.randint(1,5)
@@ -67,7 +67,7 @@ class Mago(Enemigo):
 class Vampiro(Personaje):
     
     def __init__(self):
-        super().__init__(vida=60,daño=6,dado=0)
+        super().__init__(vida=100,daño=6,dado=0)
     def atacar(self,enemigo):
         
         dado = rd.randint(1,5)
@@ -84,7 +84,7 @@ class Vampiro(Personaje):
         
 class Asesino(Personaje):
     def __init__(self):
-        super().__init__(vida=75, daño=4, dado=0)
+        super().__init__(vida=90, daño=4, dado=0)
     def ataca(self,enemigo):
 
         dado=rd.randint (1,6)
@@ -102,23 +102,24 @@ class Asesino(Personaje):
         super().curar()
         
 #criaturas amigables y eventos
-class amigable ():
-    def __init__(self,vida=5):
-        self.vida = vida
-      
-    def evento_amigable(self,jugador):
+class amigable:
+    def evento_amigable(self, jugador):
         print(f"Te encontraste a un anciano al que se le cayeron sus monedas ")
         decision = int(input("¿Quieres ayudarlo? oprime 1 o 2  |1 ayudarlo| |2 robarle| "))
         if decision==1:
             print(f"El anciano te ha dado una bendicion por tus buenas acciones")
-            print("te has fortalecido (+10 puntos de vida y  +1 puntos de daño)")
-            jugador.vida += 10
+            print("te has fortalecido (+10 puntos de vida y +1 puntos de daño)")
+            jugador.vida += 30
             jugador.daño +=1
         else:
             print("El anciano te maldice por tus malas acciones")
             jugador.vida -= 5
             jugador.daño -=1
             print("la maldicion te debilita (pierdes 5 puntos de vida y 1 punto de daño)")
+            
+class Vendedor(Personaje):
+    def __init__ (self, mercado):
+        super(). __init__(vida=45)
 
 
 niveles = 0
@@ -151,6 +152,7 @@ while jugador.vida>0:
                 break
             elif enemigo.vida<=0:
                 print("mataste al enemigo sigues avanzando por el bosque")
+
     if niveles == 2:
         evento = amigable()
         evento.evento_amigable(jugador)
